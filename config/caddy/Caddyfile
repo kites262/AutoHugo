@@ -1,0 +1,8 @@
+{$CADDY_LISTEN} {
+    root * /app/run/www
+    file_server
+    log {
+        output stdout
+        format console
+    }
+}

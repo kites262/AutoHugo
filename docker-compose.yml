@@ -1,0 +1,26 @@
+services:
+  blog:
+    image: cckites/blog:20251113
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "60123:8001"
+      - "8080:80"
+    environment:
+      - HUGO_ENV=production
+      - REPO_URL=git@github.com:kites262/kites262.github.io.git
+      - CADDY_LISTEN=:80
+      - GIT_SSH_KEY=/run/secrets/github_ssh_key
+      - WEBHOOK_ADDRESS=:8001
+      - WEBHOOK_BRANCH=hugo-src
+      - WEBHOOK_SCRIPT=./scripts/build.sh
+      - WEBHOOK_INIT_SCRIPT=./scripts/init.sh
+    secrets:
+      - github_ssh_key
+    restart: always
+
+secrets:
+  github_ssh_key:
+    # change it to actual path
+    file: ./github_id_ed25519
