@@ -17,7 +17,7 @@ type Payload struct {
 
 type App struct {
 	Addr       string `mapstructure:"address"`
-	Branch     string `mapstructure:"branch"`
+	Branch     string `mapstructure:"ref"`
 	Script     string `mapstructure:"script"`
 	InitScript string `mapstructure:"init_script"`
 }
