@@ -68,7 +68,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("Unable to decode config, %v", err)
 	}
-	app.Branch = "refs/heads/" + app.Branch
 
 	log.Info("Running init script")
 	runScript(app.InitScript)
@@ -97,14 +96,14 @@ func init() {
 
 	// default value
 	viper.SetDefault("address", ":8001")
-	viper.SetDefault("branch", "refs/heads/hugo-src")
+	viper.SetDefault("REF", "refs/heads/hugo-src")
 	viper.SetDefault("script", "./scripts/build.sh")
 	viper.SetDefault("init_script", "./scripts/init.sh")
 
 	// env config
 	viper.SetEnvPrefix("WEBHOOK")
 	_ = viper.BindEnv("address", "ADDRESS")
-	_ = viper.BindEnv("branch", "BRANCH")
+	_ = viper.BindEnv("ref", "REF")
 	_ = viper.BindEnv("script", "SCRIPT")
 	_ = viper.BindEnv("init_script", "INIT_SCRIPT")
 
